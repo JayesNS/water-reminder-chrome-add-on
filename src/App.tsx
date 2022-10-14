@@ -1,24 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
+import MugSlider from './components/MugSlider/MugSlider';
+import { BackgroundEvent, DrinkEvent, SyncTimeWithUIEvent, SyncTimeWithUIResponse } from './types';
+
+// const useActiveTab = () => {
+//   const [tab, setTab] = useState<chrome.tabs.Tab | undefined>();
+
+//   chrome.tabs && chrome.tabs.query({
+//     active: true,
+//     currentWindow: true
+//   }, (tabs) => setTab(tabs[0]));
+
+//   return tab;
+// }
 
 function App() {
+  // const [remainingTime, setRemainingTime] = useState(0);
+  // const [response, setResponse] = useState<any>();
+  // const activeTab = useActiveTab();
+  // const timer = useRef<NodeJS.Timer>();
+
+  // useLayoutEffect(() => {
+  //   syncTime();
+  //   timer.current = setInterval(() => {
+  //     syncTime();
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer.current);
+  //   }
+  // }, [activeTab?.id])
+
+
+  // const handleDrink = useCallback(() => {
+  //   setResponse('clicked');
+  //   chrome.runtime.sendMessage<BackgroundEvent>({type: 'DRINK'});
+  // }, []);
+
+  // const timerComponent = useMemo(() => {
+  //   return remainingTime > 0 ? (
+  //     <div>
+  //       Remaining Time: {remainingTime}
+  //     </div>
+  //   ) : (
+  //     <button onClick={() => handleDrink()}>Drink!</button>
+  //   );
+  // }, [remainingTime, handleDrink]);
+
+  // const syncTime = () => {
+  //   chrome.runtime.sendMessage<BackgroundEvent>({type: 'SYNC_TIME'}, (response: SyncTimeWithUIResponse) => {
+  //     if (!response) {
+  //       return;
+  //     }
+  //     setResponse(response);
+  //     setRemainingTime(response.remainingTime);
+  //   });
+  // }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MugSlider />
+      {/* <b>{JSON.stringify(response)}</b> */}
+      {/* {timerComponent} */}
+      {/* <button onClick={sendWaterReminder}>Set reminder to 30s</button> */}
     </div>
   );
 }
