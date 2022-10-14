@@ -14,23 +14,7 @@ module.exports = {
             optimization: {
                 ...webpackConfig.optimization,
                 runtimeChunk: false,
-            },
-            module: {
-                ...webpackConfig.module,
-                rules: [
-                    ...webpackConfig.module.rules,
-                  {
-                    test: /\.s[ac]ss$/i,
-                    use: [
-                      "style-loader",
-                      "css-loader",
-                      {
-                        loader: "sass-loader",
-                      },
-                    ],
-                  },
-                ],
-              },
+            }
         }),
   }
 }
