@@ -1,6 +1,7 @@
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import MugSlider from './components/MugSlider/MugSlider';
+import WaterReminder from './pages/WaterReminder/WaterReminder';
 import { BackgroundEvent, DrinkEvent, SyncTimeWithUIEvent, SyncTimeWithUIResponse } from './types';
 
 // const useActiveTab = () => {
@@ -58,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-      <MugSlider />
+      <WaterReminder />
       {/* <b>{JSON.stringify(response)}</b> */}
       {/* {timerComponent} */}
       {/* <button onClick={sendWaterReminder}>Set reminder to 30s</button> */}

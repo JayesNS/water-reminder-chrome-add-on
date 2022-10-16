@@ -16,10 +16,19 @@ const useMousePosition = ({selector, onClick, onMouseLeave, onMouseMove, lockPos
     return Math.round(num / precision) * precision;
   }
 
-  const getRelativePosition = useCallback((event: any): Position => ({
-    x: roundToPrecision(event.clientX - event.target.offsetLeft, precision),
-    y: roundToPrecision(event.clientY - event.target.offsetTop, precision)
-  }), [precision]);
+  const getRelativePosition = useCallback((event: any): Position => {
+    const {x: elementX = 0, y: elementY = 0, height, width} = document.querySelector(selector)?.getBoundingClientRect() ?? {};
+    const x = roundToPrecision(event.clientX - elementX, precision);
+    const y = roundToPrecision(event.clientY - elementY, precision);
+    const xPercent = roundToPrecision(x / (width ?? x) * 100, precision) / 100;
+    const yPercent = roundToPrecision(y / (height ?? y) * 100, precision) / 100;
+    return {
+      x,
+      y,
+      xPercent,
+      yPercent
+    }
+  }, [selector, precision]);
 
   const handleMouseMove = (event: any) => {
     const position = getRelativePosition(event);
@@ -38,9 +47,9 @@ const useMousePosition = ({selector, onClick, onMouseLeave, onMouseMove, lockPos
 
   useEffect(() => {
     const slider = document.querySelector(selector);
-    slider?.addEventListener('click', handleClick);
-    slider?.addEventListener('mousemove', handleMouseMove);
-    slider?.addEventListener('mouseleave', handleMouseLeave);
+    slider?.addEventListener('click', handleClick, true);
+    slider?.addEventListener('mousemove', handleMouseMove, true);
+    slider?.addEventListener('mouseleave', handleMouseLeave, true);
 
     return () => {
       slider?.removeEventListener('click', handleClick);

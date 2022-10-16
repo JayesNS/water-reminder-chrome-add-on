@@ -1,16 +1,24 @@
-.MugSlider {
+/* .MugSlider {
   position: relative;
   height: 150px;
   width: 150px;
   background: beige;
   overflow: hidden;
 }
-
+*/
 .MugSlider__content {
-  height: inherit;
-  width: inherit;
-  position: absolute;
-  background: aquamarine;
-  pointer-events: none;
   transition: 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.MugSlider {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.MugSlider__balance {
+  color: var(--color-text-white);
+  font-family: var(--font-primary);
 }

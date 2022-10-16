@@ -10,21 +10,32 @@ const useFillOnMouseMove = ({
   precision: number,
   lockPosition?: boolean,
   onClick?: (position: Position) => void
-}) => {
+}): {
+  reset: () => void
+} => {
   const position = useRef<Position>({
     x: 0,
     y: 0
   });
 
+  const reset = () => {
+    position.current = {
+      x: 0,
+      y: 0
+    }
+  }
+
   useMousePosition({
     selector,
     precision,
     onClick(relativePosition) {
-      position.current = relativePosition;
-      onClick?.(relativePosition);
+      if (!lockPosition || (lockPosition && relativePosition.y > position.current.y)) {
+        position.current = relativePosition;
+        onClick?.(relativePosition);
+      }
     },
     onMouseLeave() {
-      setElementPosition(position.current)
+      setElementPosition(position.current);
     },
     onMouseMove(relativePosition) {
       if (!lockPosition || (lockPosition && relativePosition.y > position.current.y)) {
@@ -34,11 +45,15 @@ const useFillOnMouseMove = ({
   })
 
   const setElementPosition = (position: Position) => {
-    const fillElement: HTMLElement | null = document.querySelector(fillSelector);
-    if (fillElement?.style) {
-      fillElement.style.top = `${position.y}px`;
-    }
+    // const fillElement: HTMLElement | null = document.querySelector(fillSelector);
+    // if (fillElement?.style) {
+    //   fillElement.setAttribute('y', '' + position.y);
+    // }
   }
+
+  return {
+    reset
+  };
 };
 
 export default useFillOnMouseMove;
