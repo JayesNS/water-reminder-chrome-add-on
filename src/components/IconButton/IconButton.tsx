@@ -3,17 +3,19 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 import './IconButton.css';
 
 const IconButton = (props: IconButtonProps) => {
-  const {icon} = props;
+  const {className, icon, onClick} = props;
 
   return (
-    <button className="IconButton">
-      <FontAwesomeIcon icon={icon} />
+    <button className="IconButton" onClick={() => {onClick?.()}}>
+      <FontAwesomeIcon className={className} icon={icon} />
     </button>
   );
 }
 
 interface IconButtonProps {
-  icon: FontAwesomeIconProps['icon']
+  className?: string;
+  icon: FontAwesomeIconProps['icon'];
+  onClick?: () => void;
 }
 
 export default IconButton;

@@ -1,8 +1,11 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { IconButton } from '../../components';
+import { useState } from 'react';
+import { IconButton, NumberPicker } from '../../components';
 import './Preferences.css';
 
 const Preferences = () => {
+  const [value, setValue] = useState(2.8);
+
   return (
     <section className="Preferences page">
       <header className="page__header">
@@ -13,6 +16,15 @@ const Preferences = () => {
         <section className="WaterReminder__header__right"></section>
       </header>
       <main className="page__body">
+        <NumberPicker
+        step={0.15}
+          label="Goal"
+          onChange={(newValue) => setValue(newValue)}
+          value={value}
+          unit="l"
+        />
+        <div style={{height: '50px'}}></div>
+        <div style={{height: '50px'}}></div>
       </main>
       <footer className="page__footer">
       </footer>
