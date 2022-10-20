@@ -6,7 +6,7 @@ import './NumberPicker.css';
 type Theme = 'dark' | 'light';
 
 const NumberPicker = (props: NumberPickerProps) => {
-  const {label, onChange, value, step = 0.1, theme = 'dark', unit} = props;
+  const {label, max, min, onChange, value, step = 0.1, theme = 'dark', unit} = props;
 
   const precision = useMemo(() => (
     step.toLocaleString().split('.')?.[1]?.length
@@ -21,8 +21,18 @@ const NumberPicker = (props: NumberPickerProps) => {
   ), [valueString]);
 
   const handleChange = useCallback((step: number) => {
-    onChange?.(value + step);
-  }, [onChange, value, step]);
+    const newValue = +valueString + step
+
+    if (min !== undefined && newValue < min) {
+      return;
+    }
+
+    if (max !== undefined && newValue > max) {
+      return;
+    }
+
+    onChange?.(newValue);
+  }, [onChange, valueString, step]);
 
   return (
     <section className={`NumberPicker NumberPicker--${theme}`}>
@@ -45,6 +55,8 @@ const NumberPicker = (props: NumberPickerProps) => {
 
 interface NumberPickerProps {
   label: string;
+  max?: number;
+  min?: number;
   onChange?: (value: number) => void;
   value: number;
   step?: number;

@@ -18,15 +18,17 @@ const Preferences = () => {
       </header>
       <main className="page__body">
         <NumberPicker
-          step={0.1}
           label="Goal"
+          min={0}
           onChange={(newValue) => setGoal(newValue)}
           value={goal}
+          step={0.1}
           unit="l"
         />
         <div style={{height: '50px'}}></div>
         <NumberPicker
           label="Cup size"
+          min={0}
           onChange={(newValue) => setCupSize(newValue)}
           value={cupSize}
           step={50}
