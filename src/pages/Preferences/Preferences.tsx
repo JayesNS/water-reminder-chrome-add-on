@@ -4,7 +4,8 @@ import { IconButton, NumberPicker } from '../../components';
 import './Preferences.css';
 
 const Preferences = () => {
-  const [value, setValue] = useState(2.8);
+  const [goal, setGoal] = useState(2.8);
+  const [cupSize, setCupSize] = useState(350);
 
   return (
     <section className="Preferences page">
@@ -17,14 +18,21 @@ const Preferences = () => {
       </header>
       <main className="page__body">
         <NumberPicker
-        step={0.15}
+          step={0.1}
           label="Goal"
-          onChange={(newValue) => setValue(newValue)}
-          value={value}
+          onChange={(newValue) => setGoal(newValue)}
+          value={goal}
           unit="l"
         />
         <div style={{height: '50px'}}></div>
-        <div style={{height: '50px'}}></div>
+        <NumberPicker
+          label="Cup size"
+          onChange={(newValue) => setCupSize(newValue)}
+          value={cupSize}
+          step={50}
+          theme="light"
+          unit="ml"
+        />
       </main>
       <footer className="page__footer">
       </footer>

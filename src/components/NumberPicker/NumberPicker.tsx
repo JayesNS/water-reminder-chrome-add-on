@@ -3,8 +3,10 @@ import { useCallback, useMemo } from 'react';
 import IconButton from '../IconButton/IconButton';
 import './NumberPicker.css';
 
+type Theme = 'dark' | 'light';
+
 const NumberPicker = (props: NumberPickerProps) => {
-  const {label, onChange, value, step = 0.1, unit} = props;
+  const {label, onChange, value, step = 0.1, theme = 'dark', unit} = props;
 
   const precision = useMemo(() => (
     step.toLocaleString().split('.')?.[1]?.length
@@ -23,7 +25,7 @@ const NumberPicker = (props: NumberPickerProps) => {
   }, [onChange, value, step]);
 
   return (
-    <section className="NumberPicker">
+    <section className={`NumberPicker NumberPicker--${theme}`}>
       <label className="NumberPicker__label">{label}</label>
       <IconButton
         className="NumberPicker__arrow NumberPicker__arrow--left"
@@ -46,6 +48,7 @@ interface NumberPickerProps {
   onChange?: (value: number) => void;
   value: number;
   step?: number;
+  theme?: Theme;
   unit: string;
 }
 
