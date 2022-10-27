@@ -9,7 +9,7 @@ const NumberPicker = (props: NumberPickerProps) => {
   const {label, max, min, onChange, value, step = 0.1, theme = 'dark', unit} = props;
 
   const precision = useMemo(() => (
-    step.toLocaleString().split('.')?.[1]?.length
+    step.toLocaleString().split(/[.,]/)?.[1]?.length
   ), [step]);
 
   const valueString = useMemo(() => (
