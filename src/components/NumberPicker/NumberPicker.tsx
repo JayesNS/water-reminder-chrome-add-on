@@ -1,9 +1,8 @@
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useCallback, useMemo } from 'react';
+import { Themed } from '../../types';
 import IconButton from '../IconButton/IconButton';
 import './NumberPicker.css';
-
-type Theme = 'dark' | 'light';
 
 const NumberPicker = (props: NumberPickerProps) => {
   const {label, max, min, onChange, value, step = 0.1, theme = 'dark', unit} = props;
@@ -53,14 +52,13 @@ const NumberPicker = (props: NumberPickerProps) => {
   )
 }
 
-interface NumberPickerProps {
+interface NumberPickerProps extends Themed {
   label: string;
   max?: number;
   min?: number;
   onChange?: (value: number) => void;
   value: number;
   step?: number;
-  theme?: Theme;
   unit: string;
 }
 
