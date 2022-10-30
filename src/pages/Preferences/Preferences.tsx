@@ -1,11 +1,15 @@
+import { useCallback, useState } from 'react';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
-import { IconButton, NumberPicker } from '../../components';
+import { IconButton, NumberPicker, TimeRangePicker } from '../../components';
 import './Preferences.css';
 
 const Preferences = () => {
   const [goal, setGoal] = useState(2.8);
   const [cupSize, setCupSize] = useState(350);
+  const [timeRange, setTimeRange] = useState([8, 16])
+
+  const handleGoalChange = useCallback((newValue: number) => setGoal(newValue), []);
+  const handleCupSizeChange = useCallback((newValue: number) => setCupSize(newValue), [])
 
   return (
     <section className="Preferences page">
@@ -20,16 +24,19 @@ const Preferences = () => {
         <NumberPicker
           label="Goal"
           min={0}
-          onChange={(newValue) => setGoal(newValue)}
+          onChange={handleGoalChange}
           value={goal}
           step={0.1}
           unit="l"
         />
-        <div style={{height: '50px'}}></div>
+        <TimeRangePicker
+          value={timeRange}
+          onChange={setTimeRange}
+        />
         <NumberPicker
           label="Cup size"
           min={0}
-          onChange={(newValue) => setCupSize(newValue)}
+          onChange={handleCupSizeChange}
           value={cupSize}
           step={50}
           theme="light"

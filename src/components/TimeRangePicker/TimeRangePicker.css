@@ -1,0 +1,9 @@
+.TimeRangePicker {
+    display: flex;
+    align-items: center;
+}
+
+.TimeRangePicker__separator {
+    font-weight: 600;
+    color: var(--color-text-white)
+}
