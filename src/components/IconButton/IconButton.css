@@ -9,7 +9,11 @@
   transition: 0.25s ease-out;
 }
 
-.IconButton:hover {
+.IconButton:disabled {
+  visibility: hidden;
+}
+
+.IconButton:not(:disabled):hover {
   cursor: pointer;
 	filter: brightness(0.75);
 }
