@@ -3,7 +3,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { IconButton, NumberPicker, TimeRangePicker } from '../../components';
 import './Preferences.css';
 
-const Preferences = () => {
+const Preferences = ({setActivePage}: {setActivePage: (page: string) => void}) => {
   const [goal, setGoal] = useState(2.8);
   const [cupSize, setCupSize] = useState(350);
   const [timeRange, setTimeRange] = useState([8, 16])
@@ -15,7 +15,7 @@ const Preferences = () => {
     <section className="Preferences page">
       <header className="page__header">
         <section className="WaterReminder__header__left">
-          <IconButton icon={faArrowLeft} />
+          <IconButton icon={faArrowLeft} onClick={() => setActivePage('home')} />
         </section>
         <section className="WaterReminder__header__center"></section>
         <section className="WaterReminder__header__right"></section>

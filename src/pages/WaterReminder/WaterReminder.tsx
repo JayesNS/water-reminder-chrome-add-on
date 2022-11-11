@@ -5,14 +5,14 @@ import './WaterReminder.css';
 import MugSlider from '../../components/MugSlider/MugSlider';
 import { IconButton } from '../../components';
 
-const WaterReminder = () => {
+const WaterReminder = ({setActivePage}: {setActivePage: (page: string) => void}) => {
   return (
     <section className="WaterReminder page">
       <header className="page__header">
         <section className="WaterReminder__header__left"></section>
         <section className="WaterReminder__header__center"></section>
         <section className="WaterReminder__header__right">
-          <IconButton icon={faGear} />
+          <IconButton icon={faGear} onClick={() => setActivePage('preferences')} />
         </section>
       </header>
       <main className="page__body">

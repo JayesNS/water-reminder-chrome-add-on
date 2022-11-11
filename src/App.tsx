@@ -1,4 +1,6 @@
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+
 import './App.css';
 import { Preferences, WaterReminder } from './pages';
 import { BackgroundEvent, DrinkEvent, SyncTimeWithUIEvent, SyncTimeWithUIResponse } from './types';
@@ -14,7 +16,11 @@ import { BackgroundEvent, DrinkEvent, SyncTimeWithUIEvent, SyncTimeWithUIRespons
 //   return tab;
 // }
 
+type Page = string;
+
 function App() {
+  const waterReminder = useRef(null);
+  const preferences = useRef(null);
   // const [remainingTime, setRemainingTime] = useState(0);
   // const [response, setResponse] = useState<any>();
   // const activeTab = useActiveTab();
@@ -56,10 +62,20 @@ function App() {
   //   });
   // }
 
+  const [activePage, setActivePage] = useState<Page>('home');
+
   return (
     <div className="App">
-      <WaterReminder />
-      <Preferences />
+      <CSSTransition nodeRef={waterReminder} appear={true} in={activePage === 'home'} timeout={200} classNames="water-reminder-page">
+        <div ref={waterReminder}>
+          <WaterReminder setActivePage={setActivePage} />
+        </div>
+      </CSSTransition>
+      <CSSTransition nodeRef={preferences} appear={true} in={activePage === 'preferences'} timeout={200} classNames="preferences-page">
+        <div ref={preferences}>
+          <Preferences setActivePage={setActivePage} />
+        </div>
+      </CSSTransition>
       {/* <b>{JSON.stringify(response)}</b> */}
       {/* {timerComponent} */}
       {/* <button onClick={sendWaterReminder}>Set reminder to 30s</button> */}
