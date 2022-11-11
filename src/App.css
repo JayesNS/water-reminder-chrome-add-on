@@ -8,7 +8,7 @@
   --color-negative: #ec5454;
   --color-positive: #6ACF62;
   --color-text-white: var(--color-background);
-  --page-transition: transform 500ms ease-out;
+  --page-transition: transform 200ms ease-out;
 }
 
 /* FIXME: development styles */
