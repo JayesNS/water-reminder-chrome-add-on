@@ -1,9 +1,11 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 import { IconButton, NumberPicker, TimeRangePicker } from '../../components';
+
 import './Preferences.css';
 
-const Preferences = ({setActivePage}: {setActivePage: (page: string) => void}) => {
+const Preferences = React.forwardRef<HTMLElement, PreferencesProps>(({setActivePage}, forwardedRef) => {
   const [goal, setGoal] = useState(2.8);
   const [cupSize, setCupSize] = useState(350);
   const [timeRange, setTimeRange] = useState([8, 16])
@@ -12,7 +14,7 @@ const Preferences = ({setActivePage}: {setActivePage: (page: string) => void}) =
   const handleCupSizeChange = useCallback((newValue: number) => setCupSize(newValue), [])
 
   return (
-    <section className="Preferences page">
+    <section ref={forwardedRef} className="Preferences page">
       <header className="page__header">
         <section className="WaterReminder__header__left">
           <IconButton icon={faArrowLeft} onClick={() => setActivePage('home')} />
@@ -47,6 +49,12 @@ const Preferences = ({setActivePage}: {setActivePage: (page: string) => void}) =
       </footer>
     </section>
   );
+});
+Preferences.displayName = 'Preferences';
+
+interface PreferencesProps {
+  ref: React.ForwardedRef<HTMLElement>;
+  setActivePage: (page: string) => void;
 }
 
 export default Preferences;
