@@ -4,14 +4,18 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { IconButton, NumberPicker, Page, TimeRangePicker } from '../../components';
 
 import './Preferences.css';
+import usePreferences from '../../hooks/usePreferences';
 
-const Preferences = React.forwardRef<HTMLElement, PreferencesProps>(({setActivePage}, forwardedRef) => {
-  const [goal, setGoal] = useState(2.8);
-  const [cupSize, setCupSize] = useState(350);
-  const [timeRange, setTimeRange] = useState([8, 16])
-
-  const handleGoalChange = useCallback((newValue: number) => setGoal(newValue), []);
-  const handleCupSizeChange = useCallback((newValue: number) => setCupSize(newValue), [])
+const Preferences = React.forwardRef<HTMLElement, PreferencesProps>((props, forwardedRef) => {
+  const {preferences, setActivePage} = props;
+  const {
+    cupSize,
+    goal,
+    handleCupSizeChange,
+    handleGoalChange,
+    handleTimeRangeChange,
+    timeRange
+  } = preferences;
 
   return (
     <Page
@@ -37,7 +41,7 @@ const Preferences = React.forwardRef<HTMLElement, PreferencesProps>(({setActiveP
           />
           <TimeRangePicker
             value={timeRange}
-            onChange={setTimeRange}
+            onChange={handleTimeRangeChange}
           />
           <NumberPicker
             label="Cup size"
@@ -58,6 +62,7 @@ Preferences.displayName = 'Preferences';
 interface PreferencesProps {
   ref: React.ForwardedRef<HTMLElement>;
   setActivePage: (page: string) => void;
+  preferences: ReturnType<typeof usePreferences>;
 }
 
 export default Preferences;

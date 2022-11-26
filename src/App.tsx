@@ -2,49 +2,53 @@ import { useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import './App.css';
+import usePreferences from './hooks/usePreferences';
 import { Preferences, WaterReminder } from './pages';
 
 type Page = string;
 
 function App() {
-  const waterReminder = useRef(null);
-  const preferences = useRef(null);
-  const pageContainer = useRef(null);
+  const waterReminderRef = useRef(null);
+  const preferencesRef = useRef(null);
+  const pageContainerRef = useRef(null);
+
+  const preferences = usePreferences();
 
   const [activePage, setActivePage] = useState<Page>('home');
 
   return (
     <div className="App">
       <CSSTransition
-        nodeRef={pageContainer}
+        nodeRef={pageContainerRef}
         appear={true}
         in={activePage === 'home'}
         timeout={200}
         classNames="page-container"
       >
-        <div ref={pageContainer} className="page-container">
+        <div ref={pageContainerRef} className="page-container">
           <CSSTransition
-            nodeRef={waterReminder}
+            nodeRef={waterReminderRef}
             appear={true}
             in={activePage === 'home'}
             timeout={200}
             classNames="water-reminder-page"
           >
             <WaterReminder
-              ref={waterReminder}
+              ref={waterReminderRef}
               setActivePage={setActivePage}
             />
           </CSSTransition>
           <CSSTransition
-            nodeRef={preferences}
+            nodeRef={preferencesRef}
             appear={true}
             in={activePage === 'preferences'}
             timeout={200}
             classNames="preferences-page"
           >
             <Preferences
-              ref={preferences}
+              ref={preferencesRef}
               setActivePage={setActivePage}
+              preferences={preferences}
             />
           </CSSTransition>
         </div>
