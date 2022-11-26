@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import { IconButton, NumberPicker, TimeRangePicker } from '../../components';
+import { IconButton, NumberPicker, Page, TimeRangePicker } from '../../components';
 
 import './Preferences.css';
 
@@ -14,40 +14,43 @@ const Preferences = React.forwardRef<HTMLElement, PreferencesProps>(({setActiveP
   const handleCupSizeChange = useCallback((newValue: number) => setCupSize(newValue), [])
 
   return (
-    <section ref={forwardedRef} className="Preferences page">
-      <header className="page__header">
-        <section className="WaterReminder__header__left">
-          <IconButton icon={faArrowLeft} onClick={() => setActivePage('home')} />
-        </section>
-        <section className="WaterReminder__header__center"></section>
-        <section className="WaterReminder__header__right"></section>
-      </header>
-      <main className="page__body">
-        <NumberPicker
-          label="Goal"
-          min={0}
-          onChange={handleGoalChange}
-          value={goal}
-          step={0.1}
-          unit="l"
-        />
-        <TimeRangePicker
-          value={timeRange}
-          onChange={setTimeRange}
-        />
-        <NumberPicker
-          label="Cup size"
-          min={0}
-          onChange={handleCupSizeChange}
-          value={cupSize}
-          step={50}
-          theme="light"
-          unit="ml"
-        />
-      </main>
-      <footer className="page__footer">
-      </footer>
-    </section>
+    <Page
+      ref={forwardedRef}
+      header={(
+        <>
+          <section className="page__header__left">
+            <IconButton icon={faArrowLeft} onClick={() => setActivePage('home')} />
+          </section>
+          <section className="page__header__center"></section>
+          <section className="page__header__right"></section>
+        </>
+      )}
+      body={(
+        <>
+          <NumberPicker
+            label="Goal"
+            min={0}
+            onChange={handleGoalChange}
+            value={goal}
+            step={0.1}
+            unit="l"
+          />
+          <TimeRangePicker
+            value={timeRange}
+            onChange={setTimeRange}
+          />
+          <NumberPicker
+            label="Cup size"
+            min={0}
+            onChange={handleCupSizeChange}
+            value={cupSize}
+            step={50}
+            theme="light"
+            unit="ml"
+          />
+        </>
+      )}
+    />
   );
 });
 Preferences.displayName = 'Preferences';
