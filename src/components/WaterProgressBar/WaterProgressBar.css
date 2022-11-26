@@ -1,0 +1,5 @@
+.WaterProgressBar {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+}

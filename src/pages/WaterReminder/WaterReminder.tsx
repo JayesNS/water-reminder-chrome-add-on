@@ -1,9 +1,9 @@
 import React from 'react';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-import MugIcon from '../../components/MugIcon/MugIcon';
 import MugSlider from '../../components/MugSlider/MugSlider';
 import { IconButton, Page } from '../../components';
+import WaterProgressBar from '../../components/WaterProgressBar/WaterProgressBar';
 
 import './WaterReminder.css';
 
@@ -31,18 +31,7 @@ const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>(({setAct
         </>
       )}
       footer={(
-        <>
-          <section className="WaterProgressBar">
-            <MugIcon fillPercentage={0} />
-            <MugIcon fillPercentage={0} />
-            <MugIcon fillPercentage={0} />
-            <MugIcon fillPercentage={0} />
-            <MugIcon fillPercentage={1} />
-            <MugIcon fillPercentage={1} />
-            <MugIcon fillPercentage={1} />
-            <MugIcon fillPercentage={1} />
-          </section>
-        </>
+        <WaterProgressBar value={0} max={8} />
       )}
     />
   );
