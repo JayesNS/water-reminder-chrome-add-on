@@ -1,10 +1,10 @@
+import { useMemo } from 'react';
+import TimeUtils from '../../utils/TimeUtils';
 import NumberPicker from '../NumberPicker/NumberPicker';
 
 import './TimeRangePicker.css';
 
 const TimeRangePicker = ({onChange, value}: TimeRangePickerProps) => {
-  const [start, end] = value
-
   const floatToTime = (value: number) => {
     const [hours, minutesInDecimal] = value.toString().split('.');
     const minutes: string = minutesInDecimal
@@ -13,15 +13,20 @@ const TimeRangePicker = ({onChange, value}: TimeRangePickerProps) => {
     return `${hours}:${minutes}`
   };
 
+  const numericValues = useMemo(() => ({
+    start: TimeUtils.getHoursFromTimestamp(value[0]),
+    end: TimeUtils.getHoursFromTimestamp(value[1])
+  }), [value]);
+
   return (
       <div className="TimeRangePicker">
         <NumberPicker
           label="start"
           theme="light"
           min={0}
-          max={Math.min(end, 24)}
-          onChange={(value) => onChange([value, end])}
-          value={start}
+          max={Math.min(numericValues.end, 24)}
+          onChange={(start) => onChange([TimeUtils.getTimestampFromNumber(value[0], start), value[1]])}
+          value={numericValues.start}
           step={0.5}
           modifyReadableValue={floatToTime}
         />
@@ -29,10 +34,10 @@ const TimeRangePicker = ({onChange, value}: TimeRangePickerProps) => {
         <NumberPicker
           label="end"
           theme="light"
-          min={Math.max(start, 0)}
+          min={Math.max(numericValues.start, 0)}
           max={24}
-          onChange={(value) => onChange([start, value])}
-          value={end}
+          onChange={(end) => onChange([value[0], TimeUtils.getTimestampFromNumber(value[1], end)])}
+          value={numericValues.end}
           step={0.5}
           modifyReadableValue={floatToTime}
         />
@@ -41,8 +46,8 @@ const TimeRangePicker = ({onChange, value}: TimeRangePickerProps) => {
 }
 
 interface TimeRangePickerProps {
-  value: number[];
-  onChange: (value: number[]) => void;
+  value: Date[];
+  onChange: (value: Date[]) => void;
 }
 
 export default TimeRangePicker;
