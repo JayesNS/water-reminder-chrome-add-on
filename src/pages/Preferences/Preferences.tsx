@@ -2,9 +2,9 @@ import React from 'react';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { IconButton, NumberPicker, Page, TimeRangePicker } from '../../components';
+import usePreferences from '../../hooks/usePreferences';
 
 import './Preferences.css';
-import usePreferences from '../../hooks/usePreferences';
 
 const Preferences = React.forwardRef<HTMLElement, PreferencesProps>((props, forwardedRef) => {
   const {preferences, setActivePage} = props;

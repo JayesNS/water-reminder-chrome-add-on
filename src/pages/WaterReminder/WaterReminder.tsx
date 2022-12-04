@@ -1,12 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-import MugSlider from '../../components/MugSlider/MugSlider';
-import { IconButton, Page } from '../../components';
-import WaterProgressBar from '../../components/WaterProgressBar/WaterProgressBar';
+import { Balance, IconButton, MugSlider, Page, WaterProgressBar } from '../../components';
+import usePreferences from '../../hooks/usePreferences';
 
 import './WaterReminder.css';
-import usePreferences from '../../hooks/usePreferences';
 
 const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, forwardedRef) => {
   const {setActivePage, preferences} = props;
@@ -17,8 +15,11 @@ const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, 
   const progressBarMax = useMemo(() => (goal / (cupSize / 1000)), [goal, cupSize]);
 
   const handleWaterConsume = useCallback((amount: number) => {
-    setWaterConsumed((waterConsumed) => waterConsumed + amount);
-  }, [setWaterConsumed]);
+    setWaterConsumed((waterConsumed) => waterConsumed + (amount * (cupSize / 1000)));
+  }, [setWaterConsumed, cupSize]);
+
+  const goalInMilliliters = useMemo(() => Math.round(goal * 1000), [goal]);
+  const waterConsumedInMilliliters = useMemo(() => Math.round(waterConsumed * 1000), [waterConsumed]);
 
   return (
     <Page
@@ -35,7 +36,10 @@ const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, 
       body={(
         <>
           <section>
-            <span className="daily-balance daily-balance--negative">-200 ml</span>
+            <Balance
+              target={goalInMilliliters}
+              value={waterConsumedInMilliliters}
+            />
           </section>
           <section>
             <MugSlider onClick={handleWaterConsume} />

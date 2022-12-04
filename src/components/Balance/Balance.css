@@ -1,0 +1,15 @@
+.daily-balance {
+    font-family: var(--font-primary);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 38px;
+}
+  
+.daily-balance--negative {
+    color: var(--color-negative);
+}
+
+.daily-balance--positive {
+    color: var(--color-positive);
+}
