@@ -6,7 +6,7 @@ class Timer {
 
   private get isRunning(): boolean {
     return !!this.timer;
-  };
+  }
 
   get tick(): number {
     return this.currentTick;

@@ -35,6 +35,7 @@ function App() {
           >
             <WaterReminder
               ref={waterReminderRef}
+              preferences={preferences}
               setActivePage={setActivePage}
             />
           </CSSTransition>
@@ -47,8 +48,8 @@ function App() {
           >
             <Preferences
               ref={preferencesRef}
-              setActivePage={setActivePage}
               preferences={preferences}
+              setActivePage={setActivePage}
             />
           </CSSTransition>
         </div>

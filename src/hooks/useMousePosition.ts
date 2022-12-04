@@ -35,10 +35,10 @@ const useMousePosition = ({selector, onClick, onMouseLeave, onMouseMove, lockPos
     onMouseMove?.(position);
   };
 
-  const handleClick = (event: any) => {
+  const handleClick = useCallback((event: any) => {
     const position = getRelativePosition(event);
     onClick(position, position.y >= 150);
-  };
+  }, [getRelativePosition, onClick]);
 
   const handleMouseLeave = (event: any) => {
     const position = getRelativePosition(event);

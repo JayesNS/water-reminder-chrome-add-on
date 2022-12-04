@@ -15,7 +15,6 @@ const WaterProgressBar = (props: WaterProgressBarProps) => {
         .map((_, index) => (
             Math.min(Math.max(-(index - max + value), 0), 1)
         ))
-        .reverse()
     ), [value, iconAmount]);
 
     const renderIcons = useCallback(() => (

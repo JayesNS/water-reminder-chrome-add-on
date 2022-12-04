@@ -45,10 +45,10 @@ const useFillOnMouseMove = ({
   })
 
   const setElementPosition = (position: Position) => {
-    // const fillElement: HTMLElement | null = document.querySelector(fillSelector);
-    // if (fillElement?.style) {
-    //   fillElement.setAttribute('y', '' + position.y);
-    // }
+    const fillElement: HTMLElement | null = document.querySelector(fillSelector);
+    if (fillElement?.style) {
+      fillElement.setAttribute('y', '' + position.y);
+    }
   }
 
   return {
