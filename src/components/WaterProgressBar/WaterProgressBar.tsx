@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import MugIcon from '../MugIcon/MugIcon';
+import MugMini from '../MugMini/MugMini';
 
 import './WaterProgressBar.css';
 
@@ -19,7 +19,7 @@ const WaterProgressBar = (props: WaterProgressBarProps) => {
 
     const renderIcons = useCallback(() => (
         iconFills.map((fill, index) => (
-            <MugIcon key={index} fillPercentage={fill} />
+            <MugMini key={index} fillPercentage={fill} />
         ))
     ), [iconFills]);
 
