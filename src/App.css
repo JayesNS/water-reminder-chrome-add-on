@@ -14,6 +14,16 @@
   --background-offset-y: 100px;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #131010;
+    --color-primary: #338899;
+    --color-accent: #F7C33E;
+    --color-negative: #ec5454;
+    --color-positive: #6ACF62;
+  }
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -35,6 +45,7 @@ html, body {
   isolation: isolate;
   display: flex;
   box-sizing: border-box;
+  background-color: var(--color-background);
 }
 
 .page-container::before {
