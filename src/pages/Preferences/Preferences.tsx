@@ -2,7 +2,7 @@ import React from 'react';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { IconButton, NumberPicker, Page, TimeRangePicker } from '../../components';
-import usePreferences from '../../hooks/usePreferences';
+import { usePreferences } from '../../hooks';
 
 import './Preferences.css';
 

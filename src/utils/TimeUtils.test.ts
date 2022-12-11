@@ -1,4 +1,4 @@
-import TimeUtils from "./TimeUtils";
+import TimeUtils from './TimeUtils';
 
 describe('getTimestampFromNumber', () => {
     it('should correctly handle decimal number', () => {

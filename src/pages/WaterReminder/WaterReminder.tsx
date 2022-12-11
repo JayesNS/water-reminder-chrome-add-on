@@ -2,24 +2,23 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
 import { Balance, IconButton, MugSlider, Page, WaterProgressBar } from '../../components';
-import usePreferences from '../../hooks/usePreferences';
+import { usePreferences } from '../../hooks';
 
 import './WaterReminder.css';
 
 const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, forwardedRef) => {
   const {setActivePage, preferences} = props;
 
-  const [waterConsumed, setWaterConsumed] = useState(0);
+  const [waterConsumedInMilliliters, setWaterConsumedInMilliliters] = useState(0);
   const {goal, cupSize} = preferences;
   
   const progressBarMax = useMemo(() => (goal / (cupSize / 1000)), [goal, cupSize]);
 
   const handleWaterConsume = useCallback((amount: number) => {
-    setWaterConsumed((waterConsumed) => waterConsumed + (amount * (cupSize / 1000)));
-  }, [setWaterConsumed, cupSize]);
+    setWaterConsumedInMilliliters((waterConsumedInMilliliters) => waterConsumedInMilliliters + (amount * cupSize));
+  }, [waterConsumedInMilliliters, setWaterConsumedInMilliliters, cupSize]);
 
   const goalInMilliliters = useMemo(() => Math.round(goal * 1000), [goal]);
-  const waterConsumedInMilliliters = useMemo(() => Math.round(waterConsumed * 1000), [waterConsumed]);
 
   return (
     <Page
@@ -42,12 +41,15 @@ const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, 
             />
           </section>
           <section>
-            <MugSlider onClick={handleWaterConsume} />
+            <MugSlider
+              initialValue={1}
+              onClick={handleWaterConsume}
+            />
           </section>
         </>
       )}
       footer={(
-        <WaterProgressBar value={waterConsumed} max={progressBarMax} />
+        <WaterProgressBar value={waterConsumedInMilliliters / cupSize} max={progressBarMax} />
       )}
     />
   );
