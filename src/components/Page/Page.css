@@ -1,7 +1,7 @@
 .Page {
     position: relative;
-    height: 400px;
-    width: 300px;
+    height: var(--card-height);
+    width: var(--card-width);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,11 +10,11 @@
 }
 
 .Page__header {
-    height: 40px;
+    height: 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
+    padding: 0.5rem;
     box-sizing: border-box;
 }
 
@@ -27,10 +27,10 @@
 }
 
 .Page__footer {
-    min-height: 40px;
+    min-height: 2.5rem;
     display: flex;
     justify-content: stretch;
     align-items: center;
-    padding: 8px;
+    padding: 0.5rem;
     box-sizing: border-box;
 }

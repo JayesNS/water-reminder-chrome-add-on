@@ -5,7 +5,7 @@
 .MugSlider {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	padding: 1rem;
 	justify-content: space-around;
 	align-items: center;
 }

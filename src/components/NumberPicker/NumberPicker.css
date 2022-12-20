@@ -42,16 +42,16 @@
 	overflow: visible;
   background: none;
   border: none;
-  font-size: 32px;
-  line-height: 37.5px;
+  font-size: 2rem;
+  line-height: 2.5rem;
   font-weight: 500;
   color: inherit;
 }
 
 .NumberPicker__unit {
   grid-area: unit;
-  font-size: 32px;
-  line-height: 37.5px;
+  font-size: 2rem;
+  line-height: 2.5rem;
   font-weight: 500;
 }
 

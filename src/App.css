@@ -10,8 +10,10 @@
   --color-text-white: var(--color-background);
   --page-transition: transform 200ms ease-out;
   --background-transition: top 300ms ease-in-out, left 300ms ease-in-out;
-  --background-offset-x: -200px;
-  --background-offset-y: 100px;
+  --card-width: 18rem;
+  --card-height: 24rem;
+  --background-offset-x: calc(var(--card-width) / 2);
+  --background-offset-y: calc(var(--card-height) / 3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,20 +29,21 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 
 .App {
-  height: 400px;
-  width: 300px;
+  width: var(--card-width);
+  height: var(--card-height);
   overflow: hidden;
-  border: 4px solid var(--color-background);
-  box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  border: 0.25rem solid var(--color-background);
+  box-shadow: 0.25rem 0.25rem 0.5rem 0.125rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
 }
 
 .page-container {
-  height: 400px;
-  width: 600px;
+  width: calc(var(--card-width) * 2);
+  height: var(--card-height);
   position: relative;
   isolation: isolate;
   display: flex;
@@ -51,8 +54,8 @@ html, body {
 .page-container::before {
   content: '';
   position: absolute;
-  width: 700px;
-  height: 400px;
+  width: calc(var(--card-width) * 2.2);
+  height: var(--card-height);
   background-color: var(--color-primary);
   z-index: -1;
   border-radius: 50%;
@@ -104,10 +107,10 @@ html, body {
 }
 
 .page-container-enter, .page-container-enter-active, .page-container-enter-done {
-  --background-offset-x: -175px;
-  --background-offset-y: 110px;
+  --background-offset-x: calc(var(--card-width) * -0.6);
+  --background-offset-y: calc(var(--card-height) * 0.3);
 }
 .page-container-exit, .page-container-exit-active, .page-container-exit-done {
-  --background-offset-x: -225px;
-  --background-offset-y: 125px;
+  --background-offset-x: calc(var(--card-width) * -0.65);
+  --background-offset-y: calc(var(--card-height) * 0.35);
 }
