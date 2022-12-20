@@ -7,11 +7,11 @@ import TimeRangePicker from './TimeRangePicker/TimeRangePicker';
 import WaterProgressBar from './WaterProgressBar/WaterProgressBar';
 
 export {
-  Balance,
-  IconButton,
-  WaterTracker,
-  NumberPicker,
-  Page,
-  TimeRangePicker,
-  WaterProgressBar
+    Balance,
+    IconButton,
+    WaterTracker,
+    NumberPicker,
+    Page,
+    TimeRangePicker,
+    WaterProgressBar,
 };

@@ -3,5 +3,5 @@ import usePreferences from './usePreferences';
 
 export {
     useFillController,
-    usePreferences
+    usePreferences,
 };

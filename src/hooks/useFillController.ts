@@ -1,4 +1,4 @@
-import { useCallback, useRef, useLayoutEffect, useEffect, MutableRefObject } from 'react';
+import {useCallback, useRef, useLayoutEffect, useEffect, MutableRefObject} from 'react';
 import Position from '../models/Position';
 import MathUtils from '../utils/MathUtils';
 
@@ -7,14 +7,14 @@ const getRelativePosition = (parent: Element, precision = 5) => (event: MouseEve
     const x = MathUtils.toFixed(event.clientX - elementX, 0);
     const y = MathUtils.toFixed(event.clientY - elementY, 0);
     const xPercent = MathUtils.toFixed((x / (width ?? x) * 100) / 100, precision);
-    const yPercent = MathUtils.toFixed((y / (height ?? y) * 100) / 100, precision)
+    const yPercent = MathUtils.toFixed((y / (height ?? y) * 100) / 100, precision);
     return {
-      x,
-      y,
-      xPercent,
-      yPercent
-    }
-  };
+        x,
+        y,
+        xPercent,
+        yPercent,
+    };
+};
 
 const useFillController = ({
     fillContainer,
@@ -22,15 +22,15 @@ const useFillController = ({
     precision = 5,
     bothDirections = true,
     onChange,
-    value
+    value,
 }: FillControllerOptions) => {
     const originalFillValue = useRef<FillValue>();
-    const fillValue = useRef<FillValue>()
+    const fillValue = useRef<FillValue>();
 
     useLayoutEffect(() => {
         const initialFillValue: FillValue = {
             height: Number(fillContainer.current.getAttribute('height')),
-            y: Number(fillContainer.current.getAttribute('y'))
+            y: Number(fillContainer.current.getAttribute('y')),
         };
         originalFillValue.current = initialFillValue;
         fillValue.current = initialFillValue;
@@ -53,7 +53,7 @@ const useFillController = ({
 
     useEffect(() => {
         if (!mouseContainer.current) {
-          return;
+            return;
         }
         mouseContainer.current.addEventListener('click', handleClick);
         mouseContainer.current.addEventListener('mousemove', handleMouseMove);
@@ -62,7 +62,7 @@ const useFillController = ({
             mouseContainer.current?.removeEventListener('click', handleClick);
             mouseContainer.current?.removeEventListener('mousemove', handleMouseMove);
             mouseContainer.current?.removeEventListener('mouseleave', handleMouseLeave);
-        }
+        };
     }, [handleClick]);
 
     const isEventCancelled = (height: number) => (
@@ -74,13 +74,13 @@ const useFillController = ({
     const getFillValueFromPercent = (percent: number, precision = 1): FillValue => {
         const {
             y: originalY = 0,
-            height: originalHeight = 0
+            height: originalHeight = 0,
         } = originalFillValue.current ?? {};
-        const newHeight = MathUtils.roundToPrecision(originalHeight * percent, precision)
+        const newHeight = MathUtils.roundToPrecision(originalHeight * percent, precision);
         const newY = originalY + originalHeight - newHeight;
         return {
             y: newY,
-            height: newHeight
+            height: newHeight,
         };
     };
 
@@ -111,10 +111,10 @@ const useFillController = ({
             fillValue.current = originalFillValue.current;
             fillValue.current && updateFill(fillValue.current);
         }, delay);
-    }
+    };
 
     return {
-        reset
+        reset,
     };
 };
 

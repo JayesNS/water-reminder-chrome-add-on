@@ -7,13 +7,13 @@ export interface SyncTimeWithUIResponse {
   remainingTime: number
 }
 export class SyncTimeWithUIEvent implements BackgroundEvent<undefined, SyncTimeWithUIResponse> {
-  type = 'SYNC_TIME'
+    type = 'SYNC_TIME';
 
-  constructor(public action: () => SyncTimeWithUIResponse) {}
+    constructor(public action: () => SyncTimeWithUIResponse) {}
 }
 
 export class DrinkEvent implements BackgroundEvent {
-  type = 'DRINK'
+    type = 'DRINK';
 
-  constructor(public action: () => void) {}
+    constructor(public action: () => void) {}
 }

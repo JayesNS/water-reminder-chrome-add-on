@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import TimeUtils from '../utils/TimeUtils';
 
 const DefaultPreferences = {
@@ -6,7 +6,7 @@ const DefaultPreferences = {
     CUP_SIZE: 350,
     TIME_RANGE_START: TimeUtils.getTimestampFromNumber(new Date(), 8),
     TIME_RANGE_END: TimeUtils.getTimestampFromNumber(new Date(), 16),
-}
+};
 
 const usePreferences = () => {
     const [goal, setGoal] = useState<number>(DefaultPreferences.GOAL);
@@ -23,7 +23,7 @@ const usePreferences = () => {
         timeRange,
         handleCupSizeChange,
         handleGoalChange,
-        handleTimeRangeChange
+        handleTimeRangeChange,
     };
 };
 

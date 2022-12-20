@@ -14,7 +14,7 @@ const TimeUtils = {
         const hours = date.getHours();
         const minutes = date.getMinutes();
         return hours + (minutes / MINUTES_IN_HOUR);
-    }
-}
+    },
+};
 
 export default TimeUtils;

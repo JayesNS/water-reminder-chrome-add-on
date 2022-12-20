@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 module.exports = {
-  webpack: {
-      configure: (webpackConfig, {env, paths}) => ({
+    webpack: {
+        configure: (webpackConfig, {env, paths}) => ({
             ...webpackConfig,
             entry: {
                 main: [env === 'development' && require.resolve('react-dev-utils/webpackHotDevClient'),paths.appIndexJs].filter(Boolean),
@@ -14,7 +15,7 @@ module.exports = {
             optimization: {
                 ...webpackConfig.optimization,
                 runtimeChunk: false,
-            }
+            },
         }),
-  }
-}
+    },
+};

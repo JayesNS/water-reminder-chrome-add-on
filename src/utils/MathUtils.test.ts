@@ -1,4 +1,4 @@
-import MathUtils from "./MathUtils";
+import MathUtils from './MathUtils';
 
 describe('toPrecision', () => {
     it('should handle correct precision', () => {
@@ -9,7 +9,7 @@ describe('toPrecision', () => {
 
     it('should throw error on wrong precision parameter', () => {
         expect(() => {
-            MathUtils.toFixed(0.4567, -3)
+            MathUtils.toFixed(0.4567, -3);
         }).toThrow();
     });
 });

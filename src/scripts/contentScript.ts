@@ -33,14 +33,14 @@
 // }
 
 const handlePopupShowEvent = (msg: {type: string}, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void) => {
-  if (msg.type !== 'SHOW_POPUP') {
-    return;
-  }
-  console.log('time to drink');
-  alert('time to drink!');
+    if (msg.type !== 'SHOW_POPUP') {
+        return;
+    }
+    console.log('time to drink');
+    alert('time to drink!');
 
-  sendResponse({value: 'test'});
-}
+    sendResponse({value: 'test'});
+};
 
 // // chrome.runtime.onMessage.addListener(messagesFromReactAppListener);
 // chrome.runtime.onMessage.addListener(handleReminderIntervalChange);

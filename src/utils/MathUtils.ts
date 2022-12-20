@@ -4,10 +4,10 @@ const MathUtils = {
     },
     roundToPrecision(num: number, precision: number) {
         if (precision <= 0) {
-          return num;
+            return num;
         }
         return Math.round(num / precision) * precision;
-      }
-}
+    },
+};
 
 export default MathUtils;

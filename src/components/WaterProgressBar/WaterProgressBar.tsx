@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import {useCallback, useMemo} from 'react';
 
 import MugMini from '../MugMini/MugMini';
 
@@ -11,10 +11,10 @@ const WaterProgressBar = (props: WaterProgressBarProps) => {
 
     const iconFills = useMemo(() => (
         new Array(iconAmount)
-        .fill(null)
-        .map((_, index) => (
-            Math.min(Math.max(-(index - max + value), 0), 1)
-        ))
+            .fill(null)
+            .map((_, index) => (
+                Math.min(Math.max(-(index - max + value), 0), 1)
+            ))
     ), [value, iconAmount]);
 
     const renderIcons = useCallback(() => (
@@ -28,7 +28,7 @@ const WaterProgressBar = (props: WaterProgressBarProps) => {
             {renderIcons()}
         </section>
     );
-}
+};
 
 interface WaterProgressBarProps {
     max: number;

@@ -28,6 +28,7 @@
     "build": "craco build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage",
+    "lint": "eslint --config .eslintrc.js .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
