@@ -1,8 +1,8 @@
-.MugSlider__content {
+.WaterTracker__content {
   	transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.MugSlider {
+.WaterTracker {
 	display: flex;
 	flex-direction: column;
 	padding: 1rem;
@@ -10,7 +10,7 @@
 	align-items: center;
 }
 
-.MugSlider__balance {
+.WaterTracker__balance {
   color: var(--color-text-white);
   font-family: var(--font-primary);
 }

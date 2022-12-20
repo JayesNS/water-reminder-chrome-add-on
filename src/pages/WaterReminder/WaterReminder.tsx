@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-import { Balance, IconButton, MugSlider, Page, WaterProgressBar } from '../../components';
+import { Balance, IconButton, WaterTracker, Page, WaterProgressBar } from '../../components';
 import { usePreferences } from '../../hooks';
 
 import './WaterReminder.css';
@@ -41,7 +41,7 @@ const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, 
             />
           </section>
           <section>
-            <MugSlider
+            <WaterTracker
               initialValue={1}
               onClick={handleWaterConsume}
             />
