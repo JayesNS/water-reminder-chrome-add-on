@@ -1,14 +1,11 @@
-import {useMemo} from 'react';
 import cx from 'classnames';
 
 import './Balance.css';
 
-const Balance = (props: BalanceProps) => {
-    const {target, value} = props;
+const DEFAULT_UNIT = 'ml';
 
-    const balance = useMemo(() => (
-        Math.round(value - target)
-    ), [value, target]);
+const Balance = (props: BalanceProps) => {
+    const {balance, unit = DEFAULT_UNIT} = props;
 
     const classNames = cx('daily-balance', {
         'daily-balance--negative': balance < 0,
@@ -16,14 +13,14 @@ const Balance = (props: BalanceProps) => {
     });
     return (
         <span className={classNames}>
-            {balance} ml
+            {balance} {unit}
         </span>
     );
 };
 
 interface BalanceProps {
-    target: number;
-    value: number; 
+    balance: number;
+    unit?: string;
 }
 
 export default Balance;

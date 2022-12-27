@@ -1,25 +1,19 @@
-import {useCallback, useRef, useMemo, useState, useEffect, MutableRefObject} from 'react';
+import {useCallback, useRef, useMemo, MutableRefObject} from 'react';
 import {useFillController} from '../../hooks';
 
 import './WaterTracker.css';
 
-const WaterTracker = ({onClick, initialValue}: WaterTrackerProps) => {
-    const [amount, setAmount] = useState<number>(1);
+const WaterTracker = ({cupSize, value, onClick}: WaterTrackerProps) => {
     const containerRef = useRef() as MutableRefObject<SVGRectElement>;
     const fillRef = useRef() as MutableRefObject<SVGRectElement>;
 
-    const balance = useMemo(() => `${Math.round(amount * 100)}% left`, [amount]);
+    const amount = useMemo(() => value / cupSize, [value, cupSize]);
 
     const handleChange = useCallback((percentFill: number) => {
-        setAmount(percentFill);
-        onClick(amount - percentFill);
+        onClick((amount - percentFill) * cupSize);
     }, [amount]);
 
-    useEffect(() => {
-        setAmount(initialValue);
-    }, [initialValue]);
-
-    const {reset} = useFillController({
+    useFillController({
         value: amount,
         mouseContainer: containerRef,
         fillContainer: fillRef,
@@ -28,12 +22,7 @@ const WaterTracker = ({onClick, initialValue}: WaterTrackerProps) => {
         onChange: handleChange,
     });
 
-    useEffect(() => {
-        if (amount <= 0) {
-            reset(1000);
-            setAmount(1);
-        }
-    }, [amount]);
+    const balance = `${Math.round(amount * 100)}% left`;
 
     return (
         <section className="WaterTracker">
@@ -63,7 +52,8 @@ const WaterTracker = ({onClick, initialValue}: WaterTrackerProps) => {
 
 interface WaterTrackerProps {
   onClick: (amount: number) => void;
-  initialValue: number
+  value: number;
+  cupSize: number;
 }
 
 export default WaterTracker;

@@ -1,55 +1,52 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback} from 'react';
 import {faGear} from '@fortawesome/free-solid-svg-icons';
 
 import {Balance, IconButton, WaterTracker, Page, WaterProgressBar} from '../../components';
-import {usePreferences} from '../../hooks';
+import {usePreferences, useWaterTracker} from '../../hooks';
 
 import './WaterReminder.css';
 
 const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, forwardedRef) => {
     const {setActivePage, preferences} = props;
 
-    const [waterConsumedInMilliliters, setWaterConsumedInMilliliters] = useState(0);
     const {goal, cupSize} = preferences;
-  
-    const progressBarMax = useMemo(() => (goal / (cupSize / 1000)), [goal, cupSize]);
 
-    const handleWaterConsume = useCallback((amount: number) => {
-        setWaterConsumedInMilliliters((waterConsumedInMilliliters) => waterConsumedInMilliliters + (amount * cupSize));
-    }, [waterConsumedInMilliliters, setWaterConsumedInMilliliters, cupSize]);
 
-    const goalInMilliliters = useMemo(() => Math.round(goal * 1000), [goal]);
+    const {handleDrink, totalWaterLeft, progress, waterLeftInCup} = useWaterTracker({goal: Math.round(goal * 1000), cupSize});
+
+    const handleWaterConsume = useCallback((waterConsumed: number) => {
+        handleDrink(waterConsumed);
+    }, [cupSize]);
+
 
     return (
         <Page
             ref={forwardedRef}
             header={(
-                <>
+                <React.Fragment>
                     <section className="page__header__left"></section>
                     <section className="page__header__center"></section>
                     <section className="page__header__right">
                         <IconButton icon={faGear} onClick={() => setActivePage('preferences')} />
                     </section>
-                </>
+                </React.Fragment>
             )}
             body={(
-                <>
+                <React.Fragment>
                     <section>
-                        <Balance
-                            target={goalInMilliliters}
-                            value={waterConsumedInMilliliters}
-                        />
+                        <Balance balance={-totalWaterLeft} />
                     </section>
                     <section>
                         <WaterTracker
-                            initialValue={1}
+                            cupSize={cupSize}
+                            value={waterLeftInCup}
                             onClick={handleWaterConsume}
                         />
                     </section>
-                </>
+                </React.Fragment>
             )}
             footer={(
-                <WaterProgressBar value={waterConsumedInMilliliters / cupSize} max={progressBarMax} />
+                <WaterProgressBar progress={progress} />
             )}
         />
     );
