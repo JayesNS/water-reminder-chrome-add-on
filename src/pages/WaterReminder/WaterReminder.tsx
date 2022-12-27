@@ -3,6 +3,7 @@ import {faGear} from '@fortawesome/free-solid-svg-icons';
 
 import {Balance, IconButton, WaterTracker, Page, WaterProgressBar} from '../../components';
 import {usePreferences, useWaterTracker} from '../../hooks';
+import {UnitFormatter} from '../../utils/formatters';
 
 import './WaterReminder.css';
 
@@ -34,7 +35,7 @@ const WaterReminder = React.forwardRef<HTMLElement, WaterReminderProps>((props, 
             body={(
                 <React.Fragment>
                     <section>
-                        <Balance balance={-totalWaterLeft} />
+                        <Balance balance={-totalWaterLeft} formatter={UnitFormatter} />
                     </section>
                     <section>
                         <WaterTracker

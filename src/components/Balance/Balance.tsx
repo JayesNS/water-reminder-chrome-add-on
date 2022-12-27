@@ -1,11 +1,10 @@
 import cx from 'classnames';
+import {Formatter} from '../../types';
 
 import './Balance.css';
 
-const DEFAULT_UNIT = 'ml';
-
 const Balance = (props: BalanceProps) => {
-    const {balance, unit = DEFAULT_UNIT} = props;
+    const {balance, formatter} = props;
 
     const classNames = cx('daily-balance', {
         'daily-balance--negative': balance < 0,
@@ -13,14 +12,14 @@ const Balance = (props: BalanceProps) => {
     });
     return (
         <span className={classNames}>
-            {balance} {unit}
+            {formatter.format(balance)}
         </span>
     );
 };
 
 interface BalanceProps {
     balance: number;
-    unit?: string;
+    formatter: Formatter<number>;
 }
 
 export default Balance;

@@ -1,5 +1,6 @@
 import {useCallback, useRef, useMemo, MutableRefObject} from 'react';
 import {useFillController} from '../../hooks';
+import { PercentFormatter } from '../../utils/formatters';
 
 import './WaterTracker.css';
 
@@ -22,8 +23,6 @@ const WaterTracker = ({cupSize, value, onClick}: WaterTrackerProps) => {
         onChange: handleChange,
     });
 
-    const balance = `${Math.round(amount * 100)}% left`;
-
     return (
         <section className="WaterTracker">
             <svg width="202"  height="162" viewBox="0 0 202 162" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +44,7 @@ const WaterTracker = ({cupSize, value, onClick}: WaterTrackerProps) => {
                     </linearGradient>
                 </defs>
             </svg>
-            <span className="WaterTracker__balance">{balance}</span>
+            <span className="WaterTracker__balance">{PercentFormatter.format(amount)} left</span>
         </section>
     );
 };
