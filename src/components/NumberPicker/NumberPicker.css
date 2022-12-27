@@ -5,7 +5,7 @@
 	grid-template-areas:
     "header header header"
     "arrow-left value arrow-right";
-  font-family: var(--font-primary);
+  font-family: var(--font-family);
 }
 
 .NumberPicker__label {

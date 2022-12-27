@@ -5,12 +5,13 @@
 .WaterTracker {
 	display: flex;
 	flex-direction: column;
-	padding: 1rem;
+	padding: var(--padding-large);
 	justify-content: space-around;
 	align-items: center;
 }
 
 .WaterTracker__balance {
-  color: var(--color-text-white);
-  font-family: var(--font-primary);
+	padding-top: var(--padding-small);
+  	color: var(--color-text-white);
+  	font-family: var(--font-family);
 }
